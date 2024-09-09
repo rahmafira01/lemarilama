@@ -20,8 +20,8 @@ class mainTest(TestCase):
 
     def test_pricey_price_user(self):
         a = Product.objects.create(
-          name= "Baggy Jeans",
-          price = 150000,
-          description = "good quality dan baru satu kali dipakai dan merk zara",
+          name= "C soho shoulder bag",
+          price = 650000,
+          description = "4uthentic, almost perfect condition!, rare finds, cakep puoll",
         )
         self.assertTrue(a.is_price_pricey)
