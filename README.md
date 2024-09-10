@@ -1,8 +1,10 @@
+## Tugas 2: Implementasi Model-View-Template (MVT) pada Django
 Rahma Dwi Maghfira  
 2306245794  
 PBP F
 
-Link Menuju Project : http://rahma-dwi31-lemarilama.pbp.cs.ui.ac.id
+Link Menuju Project : http://rahma-dwi31-lemarilama.pbp.cs.ui.ac.id  
+Link Menuju Repository : https://github.com/rahmafira01/lemarilama.git
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekedar mengukuti tutorial). 
 ### 1. Membuat Proyek Django 
@@ -28,8 +30,12 @@ Agar dapat dilihat oleh orang lain, hal pertama yang saya lakukan adalah menekan
 
 ## Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara *urls.py*, *views.py*, *models.py*, dan berkas *html*.
 
+
 ## Jelaskan fungsi git dalam pengembangan perangkat lunak!
+Git berfungsi sebagai sistem pengendalian versi yang digunakan dalam pengembangan perangkat lunak untuk melacak perubahan kode, menyimpan versi proyek, dan memfasilitasi kolaborasi antar anggota tim. Dengan Git, perubahan yang dilakukan dapat dicatat secara rinci, memungkinkan rollback ke versi sebelumnya jika diperlukan, serta meminimalkan risiko konflik kode saat bekerja dalam tim. Git juga memastikan pengelolaan proyek yang efisien. 
 
 ## Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
+Menurut saya, framework Django dijadikan sebagai permulaan dalam pembelajaran perangkat lunak karena framework ini menggunakan bahasa Python, yang dikenal sederhana dan mudah dipahami. Django menerapkan pola arsitektur Model-View-Template (MVT), yang memudahkan pemisahan logika antara Model, View, dan Template. Selain itu, platform Django ini mempunyai banyak fitur bawaan yang siap untuk digunakan sehingga cocok untuk para pemula.
 
 ## Mengapa model pada Django disebut sebagai ORM?
+Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena memungkinkan pengembang berinteraksi dengan basis data relasional menggunakan objek Python. ORM berfungsi menghubungkan antara model Python dan tabel di database, sehingga pengembang dapat mengelola data tanpa menulis SQL secara langsung. Hal ini mempermudah pengelolaan dan manipulasi data dalam database secara lebih efisien dan terstruktur.
