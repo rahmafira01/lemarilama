@@ -31,7 +31,7 @@ Setelah membuat aplikasi *main*, langkah selanjutnya yang saya lakukan adalah me
 Agar dapat dilihat oleh orang lain, hal pertama yang saya lakukan adalah menekan tombol *Create New Project* lalu mengisi *Project Name* dengan lemarilama, kemudian menekan tombol *Create New Project*. Selanjutnya, saya memasukkan URL *deployments* PWS saya ke variabel ```ALLOWED_HOSTS``` di berkas ```settings.py```. Setelah melakukan semua perubahan, saya melakukan git add, commit, dan push ke Github dan PWS untuk memastikan proyek dapat diakses publik. 
 
 ## Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara *urls.py*, *views.py*, *models.py*, dan berkas *html*.
-![alt text](<Blank diagram.png>)
+![bagan.png](images/bagan.png)
 
 ## Jelaskan fungsi git dalam pengembangan perangkat lunak!
 Git berfungsi sebagai sistem pengendalian versi yang digunakan dalam pengembangan perangkat lunak untuk melacak perubahan kode, menyimpan versi proyek, dan memfasilitasi kolaborasi antar anggota tim. Dengan Git, perubahan yang dilakukan dapat dicatat secara rinci, memungkinkan rollback ke versi sebelumnya jika diperlukan, serta meminimalkan risiko konflik kode saat bekerja dalam tim. Git juga memastikan pengelolaan proyek yang efisien. 
@@ -79,12 +79,12 @@ Method is_valid() pada form Django berfungsi untuk memvalidasi input pengguna se
 
 ## Screenshot Postman
 ### 1. HTML Source  
-![alt text](HTML.png)  
+![HTML.png](images/HTML.png)
 ### 2. XML  
-![alt text](XML.png)  
+![XML.png](images/XML.png)
 ### 3. JSON  
-![alt text](JSON.png)   
+![JSON.png](images/JSON.png)
 ### 4. XML by ID  
-![alt text](XMLBYID.png)  
+![XMLBYID.png](images/XMLBYID.png)
 ### 5. JSON by ID  
-![alt text](JSONBYID.png)  
+![JSONBYID.png](images/JSONBYID.png)
