@@ -4,7 +4,7 @@ Rahma Dwi Maghfira
 2306245794  
 PBP F
 
-Link Menuju Project : http://rahma-dwi31-lemarilama.pbp.cs.ui.ac.id
+Link Menuju Project : http://rahma-dwi31-lemarilama.pbp.cs.ui.ac.id  
 Link Menuju Repository : https://github.com/rahmafira01/lemarilama.git  
 
 # Tugas 2: Implementasi Model-View-Template (MVT) pada Django
