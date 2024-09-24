@@ -87,4 +87,28 @@ Method is_valid() pada form Django berfungsi untuk memvalidasi input pengguna se
 ### 4. XML by ID  
 ![XMLBYID.png](images/XMLBYID.png)
 ### 5. JSON by ID  
-![JSONBYID.png](images/JSONBYID.png)
+![JSONBYID.png](images/JSONBYID.png)  
+  
+
+# Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).  
+### 1. Mengimplementasikan fungsi registrasi, login, dan logout
+Hal pertama yang saya lakukan adalah membuat halaman registrasi dengan mengimpor ```UserCreationForm``` dan ```messages``` di ```views.py```, kemudian membuat fungsi ```register``` untuk menangani pemuatan akun baru dan menampilkan formulir registrasi pada ```register.html```. Setelah itu, saya menambahkan fungsi ```login_user``` yang menggunakan ```AuthenticationForm``` untuk autentikasi pengguna, dan menampilkan formulir login pada ```login.html```. Setelah login berhasil, pengguna diarahkan ke halaman utama. Selanjutnya, saya membuat fungsi ```logout_user``` untuk menghapus sesi pengguna yang sedang login, dan menambahkan tombol logout di halaman utama (```main.html```). Semua fungsi ini dihubungkan melalui path yang ditambahkan pada ```urls.py```.   
+### 2. Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+Pertama, daftar akun pengguna melalui halaman registrasi dengan mengisi *username* dan *password*. Setelah berhasil, login dan tambahkan tiga produk melalui form yang berisi nama produk, harga, dan deskripsi. Setelah selesai, logout dan ulangi proses dengan mendaftarkan akun kedua.  
+### 3. Menghubungkan model ```Product``` dengan ```User```.
+Saya menguhubungkan LemariLama dengan User menggunakan ```ForeignKey``` di ```models.py```. Di ```views.py```, saya memodifikasi fungsi ```create_product``` agar setiap entri product terkait dengan pengguna yang sedang login, dan hanya menampilkan entri pengguna tersebut di ```show_main``` menggunakan ```filter(user=request.user)```. Setelah itu, saya melakukan migrasi dengan ```python3 manage.py makemigrations```. Terakhir, atur ```DEBUG``` untuk ```production``` di ```settings.py``` dan menjalankan server.  
+### 4. Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan ```cookies``` seperti ```last login``` pada halaman utama aplikasi.  
+Menambahkan ```cookie``` untuk menyimpan data ```last login``` dan menampilkannya di halaman utama. Di ```login_user```, setelah login berhasil, tambahkan ```cookie``` ```last_login``` menggunakan ```response.set_cookie()```. Pada ```show_main```, tampilkan ```last_login``` dari ```cookie``` di ```context```. Di ```logout_user```, hapus *cookie* ```last_login``` saat logout menggunakan ```response.delete_cookie()```. Terakhir, di ```main.html```, tambahkan kode untuk menampilkan ```last login``` di halaman utama. Jalankan proyek dan cek ```cookies``` di *browser* untuk melihat hasilnya.  
+
+## Apa perbedaan antara ```HttpResponseRedirect()``` dan ```redirect()```
+Perbedaan utama antara *HttpResponseRedirect()* dan *redirect()* di Django adalah bahwa *HttpResponseRedirect()* adalah kelas bawaan Django yang secara manual mengarahkan pengguna ke URL tertentu, sedangkan *redirect()* adalah fungsi yang mempermudah penggunaan *HttpResponseRedirect()*. Dengan *redirect()*, kita bisa langsung memasukkan nama URL atau view name tanpa harus membangun URL secara manual, sehingga lebih efisien dan mudah digunakan.
+
+##  Jelaskan cara kerja penghubungan model Product dengan User!
+Penghubungan model *Product* dengan *User* di Django biasanya dilakukan menggunakan *ForeignKey*. Pada model *Product*, tambahkan field *user* dengan tipe *ForeignKey* yang mengacu pada model *User*. Ini memungkinkan setiap produk dikaitkan dengan pengguna yang membuatnya. Setiap *ForeignKey* juga dapat diatur dengan opsi *on_delete* (misalnya *CASCADE*), yang menentukan apa yang terjadi pada produk ketika pengguna dihapus. Dengan penghubungan ini, kita bisa mengakses data pengguna dari produk atau sebaliknya.
+
+## Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+Authentication adalah proses verifikasi identitas pengguna (apakah pengguna adalah siapa yang mereka klaim), sedangkan authorization adalah proses menentukan hak akses pengguna ke sumber daya setelah mereka terautentikasi. Saat pengguna login, Django melakukan authentication dengan memverifikasi kredensial (seperti username dan password). Setelah berhasil login, Django menggunakan izin atau *permissions* untuk menentukan hak akses (authorization) pengguna ke berbagai fitur atau halaman. Django mengimplementasikan authentication melalui *User* model dan *auth* system, sedangkan authorization dikelola dengan *permissions* dan *decorators* seperti `@login_required` untuk membatasi akses.
+
+## Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+Django mengingat pengguna yang telah login dengan menggunakan *session cookies*. Ketika pengguna login, Django menyimpan informasi pengguna dalam cookie yang terkait dengan sesi, memungkinkan pengguna tetap terautentikasi selama sesi berlangsung tanpa perlu login ulang setiap kali berpindah halaman. Selain autentikasi, cookies juga digunakan untuk menyimpan preferensi pengguna atau data sementara lainnya. Namun, tidak semua cookies aman—cookies yang tidak dienkripsi atau dilindungi dengan baik rentan terhadap serangan seperti *cookie hijacking*. Untuk keamanan, Django menggunakan *session* cookies yang aman (misalnya dengan *HttpOnly* dan *Secure* flags).
