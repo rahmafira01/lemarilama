@@ -112,3 +112,40 @@ Authentication adalah proses verifikasi identitas pengguna (apakah pengguna adal
 
 ## Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
 Django mengingat pengguna yang telah login dengan menggunakan *session cookies*. Ketika pengguna login, Django menyimpan informasi pengguna dalam cookie yang terkait dengan sesi, memungkinkan pengguna tetap terautentikasi selama sesi berlangsung tanpa perlu login ulang setiap kali berpindah halaman. Selain autentikasi, cookies juga digunakan untuk menyimpan preferensi pengguna atau data sementara lainnya. Namun, tidak semua cookies aman—cookies yang tidak dienkripsi atau dilindungi dengan baik rentan terhadap serangan seperti *cookie hijacking*. Untuk keamanan, Django menggunakan *session* cookies yang aman (misalnya dengan *HttpOnly* dan *Secure* flags).
+
+# Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).  
+###  1. Implementasikan fungsi untuk menghapus dan mengedit product
+Yang pertama saya lakukan adalah dengan membuat fungsi baru bernama ```delete_product``` dan ```edit_product``` yang menerima parameter ```request``` dan ```id``` pada ```views.py```. Lalu mengimport fungsi delete dan edit pada forlder ```urls.py``` dan menambahkan *path url* kedalam ```urlpatters```. Setelah itu ubah kode di <td> terakhir pada ```main.html```. 
+### 2. Kustomisasi halaman login, register, dan tambah product semenarik mungkin.
+Pada kustomisasi halaman login, register, dan tambah produk saya menggunakan warna palatte #322D29, #72383D, #AC9C8D, #D1C7BD, #D9D9D9, #EFE9E1
+### 3. Kustomisasi halaman daftar product menjadi lebih menarik dan responsive.
+Pada tahap ini yang saya lakukan adalah menambah 3 fitur pada navbar, yaitu home, product, dan profile. 
+
+## Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!   
+### 1. Inline Sytles 
+CSS yang ditulis langsung di dalam atribut style pada elemen HTML memiliki prioritas tertinggi. Contoh: ```<div style="color: red;">```.
+### 2. ID Selectors 
+Selector yang menggunakan ID (dikenali dengan simbol #) memiliki prioritas tinggi kedua. Contoh: ```#header```.
+### 3. Class, Attribute, dan Pseudo-classes Selectors 
+Selector yang menggunakan class (dikenali dengan simbol .), attribute selector, dan pseudo-classes (seperti :*hover*) memiliki prioritas menengah. Contoh: ```.menu, [type="text"], :first-child```.
+### 4. Element (Type) Selectors
+Selector yang menggunakan nama elemen HTML, seperti div, p, atau h1, memiliki prioritas lebih rendah. Contoh: ```div, p```.
+
+##  Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!  
+Responsive design menjadi konsep penting dalam pengembangan aplikasi web karena tampilan dan fungsionalitas aplikasi dapat disesuaikan dengan ukuran layar dan resolusi perangkat yang berbeda, sehingga meningkatkan pengalaman pengguna. Contoh aplikasi yang sudah menerapkan responsive design adalah situs web e-commerce seperti Amazon dan eBay, yang menyesuaikan layout dan konten mereka agar mudah diakses di berbagai perangkat. Sementara itu, contoh aplikasi yang belum menerapkan responsive design adalah beberapa situs berita lama atau blog yang masih memiliki layout tetap, sehingga tampilan mereka menjadi tidak optimal saat diakses melalui perangkat mobile, mengurangi kenyamanan pengguna.
+
+## Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+Padding adalah ruang untuk mengosongkan area di sekitar konten (transparan), Border adalah garis tepian yang membungkus konten dan padding-nya, dan Margin adalah ruang untun mengosongkan area di sekitar border (transparan).  
+``` 
+div {
+  width: 300px;
+  border: 15px solid green;
+  padding: 50px;
+  margin: 20px;
+}
+```  
+
+## Jelaskan konsep flex box dan grid layout beserta kegunaannya!  
+Flexbox adalah model layout CSS yang memungkinkan pengembang untuk menyusun elemen dalam satu baris atau kolom secara fleksibel dan responsif. Dengan Flexbox, elemen dapat dengan mudah diselaraskan, dibagi ruang, dan diatur ukurannya tanpa perlu menggunakan float atau positioning. Flexbox digunakan untuk tata letak satu dimensi (baris atau kolom), cocok untuk elemen-elemen yang perlu diatur dalam satu arah.
+Grid Layout adalah model layout CSS yang memungkinkan pengembang untuk membagi halaman menjadi grid dua dimensi, terdiri dari baris dan kolom. Dengan Grid Layout, elemen dapat ditempatkan secara tepat di dalam grid, memberikan kontrol yang lebih besar atas tata letak dibandingkan dengan model layout lainnya. Grid Layout lebih cocok untuk tata letak dua dimensi (baris dan kolom), memberikan fleksibilitas lebih besar untuk desain halaman yang lebih kompleks.
