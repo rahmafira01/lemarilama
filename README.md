@@ -7,6 +7,7 @@ PBP F
 Link Menuju Project : http://rahma-dwi31-lemarilama.pbp.cs.ui.ac.id  
 Link Menuju Repository : https://github.com/rahmafira01/lemarilama.git  
 
+
 # Tugas 2: Implementasi Model-View-Template (MVT) pada Django
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekedar mengukuti tutorial). 
 ### 1. Membuat Proyek Django 
@@ -113,7 +114,7 @@ Authentication adalah proses verifikasi identitas pengguna (apakah pengguna adal
 ## Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
 Django mengingat pengguna yang telah login dengan menggunakan *session cookies*. Ketika pengguna login, Django menyimpan informasi pengguna dalam cookie yang terkait dengan sesi, memungkinkan pengguna tetap terautentikasi selama sesi berlangsung tanpa perlu login ulang setiap kali berpindah halaman. Selain autentikasi, cookies juga digunakan untuk menyimpan preferensi pengguna atau data sementara lainnya. Namun, tidak semua cookies aman—cookies yang tidak dienkripsi atau dilindungi dengan baik rentan terhadap serangan seperti *cookie hijacking*. Untuk keamanan, Django menggunakan *session* cookies yang aman (misalnya dengan *HttpOnly* dan *Secure* flags).
 
-# Tugas 4: Implementasi Autentikasi, Session, dan Cookies pada Django
+# Tugas 5: Desain Web menggunakan HTML, CSS dan Framework CSS
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).  
 ###  1. Implementasikan fungsi untuk menghapus dan mengedit product
 Yang pertama saya lakukan adalah dengan membuat fungsi baru bernama ```delete_product``` dan ```edit_product``` yang menerima parameter ```request``` dan ```id``` pada ```views.py```. Lalu mengimport fungsi delete dan edit pada forlder ```urls.py``` dan menambahkan *path url* kedalam ```urlpatters```. Setelah itu ubah kode di <td> terakhir pada ```main.html```. 
@@ -148,4 +149,63 @@ div {
 
 ## Jelaskan konsep flex box dan grid layout beserta kegunaannya!  
 Flexbox adalah model layout CSS yang memungkinkan pengembang untuk menyusun elemen dalam satu baris atau kolom secara fleksibel dan responsif. Dengan Flexbox, elemen dapat dengan mudah diselaraskan, dibagi ruang, dan diatur ukurannya tanpa perlu menggunakan float atau positioning. Flexbox digunakan untuk tata letak satu dimensi (baris atau kolom), cocok untuk elemen-elemen yang perlu diatur dalam satu arah.
-Grid Layout adalah model layout CSS yang memungkinkan pengembang untuk membagi halaman menjadi grid dua dimensi, terdiri dari baris dan kolom. Dengan Grid Layout, elemen dapat ditempatkan secara tepat di dalam grid, memberikan kontrol yang lebih besar atas tata letak dibandingkan dengan model layout lainnya. Grid Layout lebih cocok untuk tata letak dua dimensi (baris dan kolom), memberikan fleksibilitas lebih besar untuk desain halaman yang lebih kompleks.
+Grid Layout adalah model layout CSS yang memungkinkan pengembang untuk membagi halaman menjadi grid dua dimensi, terdiri dari baris dan kolom. Dengan Grid Layout, elemen dapat ditempatkan secara tepat di dalam grid, memberikan kontrol yang lebih besar atas tata letak dibandingkan dengan model layout lainnya. Grid Layout lebih cocok untuk tata letak dua dimensi (baris dan kolom), memberikan fleksibilitas lebih besar untuk desain halaman yang lebih kompleks.    
+
+# Tugas 6: JavaScript dan AJAX
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+### AJAX GET
+* *Ubahlah kode cards data mood agar dapat mendukung AJAX GET.*  
+Pada file  `main/template/main.html`, tambahkan elemen `<div>` yang akan digunakan untuk menampilkan daftar product. Kemudian, tambahkan kode JavaScript untuk mengambil data product menggunakan `fetch()` dan menampilkannya secara dinamis.  
+* *Lakukan pengambilan data mood menggunakan AJAX GET. Pastikan bahwa data yang diambil hanyalah data milik pengguna yang logged-in.*    
+Membuat fungsi `getProductEntries()` yang mengambil data product dari server menggunakan AJAX dan memastikan URL mengarah ke *endpoint*. 
+### AJAX POST  
+* Menambahkan tombol di halaman utama untuk membuka modal  
+* Modal di-trigger dengan menekan suatu tumbol pada halaman utama  
+`<button onclick="showModal()">Add Product</button>`
+* Saat penambahan product berhasil maka modal harus ditutu dengan memanggil fungsi `hideModal()` dan reset form
+* Jika penambahan gagal, maka menampilkan pesan error menggunakan `alert()` atau elemen didalam modal.
+* Buatlah fungsi view baru untuk menambahkan mood baru ke dalam basis data.  
+```
+@csrf_exempt
+@require_POST
+def add_product_ajax(request):
+    name = strip_tags(request.POST.get("name")) # strip HTML tags!
+    description = strip_tags(request.POST.get("description")) 
+    price = request.POST.get("price")
+    user = request.user
+
+    new_product = Product(
+        name=name, 
+        price=price,
+        description=description,
+        user=user
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
+```
+* Buatlah path /create-ajax/:
+``` path('create-product-ajax', add_product_ajax, name='add_product_ajax'),```  
+* Hubungkan form yang telah kamu buat di dalam modal kamu ke path /create-ajax/.
+``` 
+ <form id="ProductForm">
+          <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-[#322D29]">Product Name</label>
+            <input type="text" id="name" name="name" class="mt-1 block w-full border border-[#AC9C8D] rounded-md p-2 hover:border-[#72383D]" placeholder="Enter your product name" required>
+          </div>
+  <form>
+``` 
+* Lakukan refresh pada halaman utama secara asinkronus untuk menampilkan daftar mood terbaru tanpa reload halaman utama secara keseluruhan.
+Setelah menambahkan product, panggil ``` refreshProductEntries()```  untuk memperbarui tampilan product tanpa memuat ulang halaman utama.  
+
+## Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!  
+JavaScript sangat bermanfaat dalam pengembangan aplikasi web karena memungkinkan interaksi yang dinamis dan responsif antara halaman web dan pengguna. Dengan eksekusi di sisi client, JavaScript mengurangi beban server dan mempercepat pemuatan halaman melalui caching file eksternal. Selain itu, JavaScript mendukung event-driven programming, memungkinkan kode hanya dijalankan ketika terjadi peristiwa tertentu. Kemampuannya untuk memanipulasi DOM secara langsung juga mempermudah pembaruan konten tanpa memuat ulang halaman, sehingga meningkatkan pengalaman pengguna secara keseluruhan.  
+
+## Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+Fungsi `await` dalam penggunaan `fetch()` adalah untuk menunggu hingga permintaan HTTP selesai sebelum melanjutkan eksekusi kode berikutnya. Jika `await` tidak digunakan, `fetch()` hanya mengembalikan *Promise* yang belum selesai, sehingga kode di bawahnya mungkin dieksekusi sebelum respons diterima, yang bisa menyebabkan error atau data yang belum siap. Dengan `await`, kita dapat memastikan proses asynchronous berjalan lebih teratur dan hasil dari fetch diproses setelah datanya tersedia.  
+
+## Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+Decorator `@csrf_exempt` digunakan pada view untuk AJAX POST agar Django tidak memeriksa token CSRF, sehingga request POST dapat diterima tanpa error. Ini diperlukan jika token CSRF tidak dikirim dengan request, tetapi harus digunakan dengan hati-hati karena dapat membuka celah keamanan.
+
+## Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+Pembersihan data input pengguna dilakukan di belakang karena validasi di frontend saja tidak cukup untuk mencegah ancaman keamanan seperti Cross-Site Scripting (XSS). Meskipun pembersihan di frontend menggunakan DOMPurify dapat melindungi saat data ditampilkan di browser, data yang dikirim ke server tetap berpotensi berbahaya jika tidak dibersihkan di backend. Dalam tutorial ini, fungsi `strip_tags` di backend digunakan untuk menghilangkan semua tag HTML dari input pengguna sebelum data tersebut disimpan di basis data. Ini melindungi aplikasi dari serangan Stored XSS, di mana data berbahaya dapat tersimpan di server dan dieksekusi saat ditampilkan kepada pengguna lain. Pembersihan di backend memastikan data yang disimpan aman, terlepas dari apakah pengguna memanipulasi kode frontend.
