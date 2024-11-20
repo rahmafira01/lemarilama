@@ -12,7 +12,7 @@
         Login to your account
       </h2>
     </div>
-    <form class="mt-8 space-y-6" method="POST" action="">
+    <form class="mt-8 space-y-6" method="POST" action="{% url 'main:login' %}">
       {% csrf_token %}
       <input type="hidden" name="remember" value="true">
       <div class="rounded-md shadow-sm -space-y-px">
